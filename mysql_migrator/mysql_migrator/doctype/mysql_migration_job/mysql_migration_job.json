@@ -117,7 +117,7 @@
    "fieldname": "table_mapping_instruction",
    "fieldtype": "HTML",
    "label": "Instructions",
-   "options": "<div class='text-muted small alert alert-info'><b>Mapping Instructions:</b> When you save this Job, tables from your SQL file are automatically listed below. Select the target ERPNext DocType (e.g., <i>Customer, Supplier, Item, Purchase Order, Sales Order</i>) for each table. The system automatically inspects fields. If any MySQL columns are missing in ERPNext, you will be alerted to approve proceeding without those unmapped fields or place the job on hold.</div>"
+   "options": "<div class='text-muted small alert alert-info'><b>Mapping Instructions:</b> When you first save this Job, tables from your SQL file are automatically listed below. Select the target ERPNext DocType (e.g., <i>Customer, Supplier, Item, Purchase Order, Sales Order</i>) for each table.<br>• <b>Deleting Tables:</b> If you do not want to migrate a table into ERPNext, simply delete its row from this table and Save. The deleted table will <b>not</b> come back on save.<br>• <b>Restoring Tables:</b> If you deleted a table by mistake, click <b>'Reload Tables from SQL'</b> to restore all tables from the source SQL file.</div>"
   },
   {
    "fieldname": "table_summary",

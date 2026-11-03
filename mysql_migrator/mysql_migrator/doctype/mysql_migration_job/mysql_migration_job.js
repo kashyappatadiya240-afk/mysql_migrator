@@ -19,6 +19,25 @@ frappe.ui.form.on('MySQL Migration Job', {
 		}
 
 		if (!frm.is_new()) {
+			// Action button: Reload All Tables from SQL
+			frm.add_custom_button(__('Reload All Tables from SQL'), function() {
+				frappe.confirm(
+					__('This will re-scan the SQL file and restore any missing or deleted tables. Continue?'),
+					function() {
+						frappe.call({
+							method: 'reload_all_tables',
+							doc: frm.doc,
+							freeze: true,
+							freeze_message: __('Restoring tables from SQL...'),
+							callback: function(r) {
+								frm.reload_doc();
+								frappe.show_alert({message: __('All tables restored from SQL file'), indicator: 'green'});
+							}
+						});
+					}
+				);
+			}, __('Actions'));
+
 			// Action button: Rescan & Match Fields
 			frm.add_custom_button(__('Rescan & Match Fields'), function() {
 				frm.save();
@@ -42,6 +61,27 @@ frappe.ui.form.on('MySQL Migration Job', {
 					}
 				);
 			}, __('Actions'));
+
+			// Add custom button directly onto the child table grid toolbar
+			if (frm.fields_dict.table_summary && frm.fields_dict.table_summary.grid) {
+				frm.fields_dict.table_summary.grid.add_custom_button(__('Reload Tables from SQL'), function() {
+					frappe.confirm(
+						__('This will re-scan the SQL file and restore any missing or deleted tables. Continue?'),
+						function() {
+							frappe.call({
+								method: 'reload_all_tables',
+								doc: frm.doc,
+								freeze: true,
+								freeze_message: __('Restoring tables from SQL...'),
+								callback: function(r) {
+									frm.reload_doc();
+									frappe.show_alert({message: __('All tables restored from SQL file'), indicator: 'green'});
+								}
+							});
+						}
+					);
+				});
+			}
 
 			// Primary Action: Run Migration with Approval Workflow
 			if (frm.doc.status !== 'Completed') {

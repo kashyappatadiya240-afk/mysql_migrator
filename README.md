@@ -19,10 +19,12 @@
 - Simply attach or specify the file path of any `.sql` dump file and click **Save**.
 - The migrator automatically parses the DDL and lists all discovered MySQL tables in the **Tables Summary** child table, showing exact source row counts.
 
-### 3. 🔀 Flexible Target DocType Mapping
+### 3. 🔀 Flexible Target DocType Mapping & Deletion Control
 - In the **Tables Summary** child table, each row features a searchable **Link to `DocType`** displaying all DocTypes present in your ERPNext system.
 - Automatically suggests sensible defaults (e.g., `suppliers` ➔ `Supplier`, `customers` ➔ `Customer`, `items` ➔ `Item`, `purchase_orders` ➔ `Purchase Order`, `orders` ➔ `Sales Order`, `employees` ➔ `Employee`).
 - Administrators can override and assign **any custom or standard ERPNext DocType** for each table.
+- **Deletion Persistence**: When you delete a table you don't want to migrate and click **Save**, it **stays deleted** and is omitted from migration.
+- **On-Demand Table Restore**: If you delete a table by mistake, click **'Reload Tables from SQL'** on the table toolbar or the Actions menu to instantly restore all tables from the source SQL file while preserving your existing mappings.
 
 ### 4. ⚖️ Field Matching & Discrepancy Detection
 - The system automatically compares MySQL table column definitions against the selected ERPNext DocType:
