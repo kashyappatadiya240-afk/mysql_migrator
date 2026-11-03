@@ -1,0 +1,91 @@
+{
+ "name": "MySQL Migration Table Summary",
+ "module": "MySQL Migrator",
+ "doctype": "DocType",
+ "istable": 1,
+ "editable_grid": 1,
+ "field_order": [
+  "table_name",
+  "source_count",
+  "target_doctype",
+  "status",
+  "unmatched_fields",
+  "matched_fields",
+  "missing_required_fields",
+  "imported_count",
+  "duration_sec",
+  "details"
+ ],
+ "fields": [
+  {
+   "fieldname": "table_name",
+   "fieldtype": "Data",
+   "label": "MySQL Table",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_count",
+   "fieldtype": "Int",
+   "label": "Source Rows",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "target_doctype",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "label": "Target DocType",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nValidated\nPending Approval\nApproved\nOn Hold\nSuccess\nFailed",
+   "default": "Pending",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "unmatched_fields",
+   "fieldtype": "Small Text",
+   "label": "Unmatched in ERPNext",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "matched_fields",
+   "fieldtype": "Small Text",
+   "label": "Matched Fields",
+   "read_only": 1
+  },
+  {
+   "fieldname": "missing_required_fields",
+   "fieldtype": "Small Text",
+   "label": "Missing Required Fields",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imported_count",
+   "fieldtype": "Int",
+   "label": "Imported Rows",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "duration_sec",
+   "fieldtype": "Float",
+   "label": "Duration (s)",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Small Text",
+   "label": "Details",
+   "read_only": 1
+  }
+ ],
+ "permissions": []
+}

@@ -1,0 +1,162 @@
+{
+ "name": "MySQL Migration Job",
+ "module": "MySQL Migrator",
+ "doctype": "DocType",
+ "autoname": "MIG-JOB-.YYYY.-.#####",
+ "field_order": [
+  "title",
+  "status",
+  "column_break_1",
+  "source_type",
+  "sql_file_path",
+  "uploaded_sql_file",
+  "options_section",
+  "clear_existing_data",
+  "column_break_opt",
+  "summary_section",
+  "total_source_records",
+  "total_imported_records",
+  "column_break_sum",
+  "migration_duration",
+  "tables_section",
+  "table_mapping_instruction",
+  "table_summary",
+  "log_section",
+  "execution_log"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Job Title",
+   "reqd": 1,
+   "default": "MySQL Migration into ERPNext Core",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nValidated\nPending Approval\nOn Hold\nIn Progress\nCompleted\nFailed",
+   "default": "Draft",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_type",
+   "fieldtype": "Select",
+   "label": "Source Type",
+   "options": "SQL Dump File",
+   "default": "SQL Dump File",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sql_file_path",
+   "fieldtype": "Data",
+   "label": "SQL File Path",
+   "default": ""
+  },
+  {
+   "fieldname": "uploaded_sql_file",
+   "fieldtype": "Attach",
+   "label": "Or Upload SQL File"
+  },
+  {
+   "fieldname": "options_section",
+   "fieldtype": "Section Break",
+   "label": "Migration Options"
+  },
+  {
+   "fieldname": "clear_existing_data",
+   "fieldtype": "Check",
+   "label": "Clear Existing Data in Target DocTypes Before Migration",
+   "default": "0"
+  },
+  {
+   "fieldname": "column_break_opt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Execution Summary"
+  },
+  {
+   "fieldname": "total_source_records",
+   "fieldtype": "Int",
+   "label": "Total Source Records",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "total_imported_records",
+   "fieldtype": "Int",
+   "label": "Total Imported Records",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_sum",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "migration_duration",
+   "fieldtype": "Data",
+   "label": "Duration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tables_section",
+   "fieldtype": "Section Break",
+   "label": "Tables Summary & Target DocType Mapping"
+  },
+  {
+   "fieldname": "table_mapping_instruction",
+   "fieldtype": "HTML",
+   "label": "Instructions",
+   "options": "<div class='text-muted small alert alert-info'><b>Mapping Instructions:</b> When you save this Job, tables from your SQL file are automatically listed below. Select the target ERPNext DocType (e.g., <i>Customer, Supplier, Item, Purchase Order, Sales Order</i>) for each table. The system automatically inspects fields. If any MySQL columns are missing in ERPNext, you will be alerted to approve proceeding without those unmapped fields or place the job on hold.</div>"
+  },
+  {
+   "fieldname": "table_summary",
+   "fieldtype": "Table",
+   "options": "MySQL Migration Table Summary",
+   "label": "Tables Summary"
+  },
+  {
+   "fieldname": "log_section",
+   "fieldtype": "Section Break",
+   "label": "Migration Execution Log",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "execution_log",
+   "fieldtype": "Long Text",
+   "label": "Execution Log",
+   "read_only": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "All",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "export": 1
+  }
+ ],
+ "track_changes": 1
+}

@@ -1,0 +1,116 @@
+{
+ "name": "MySQL Migration",
+ "label": "MySQL Migration",
+ "title": "MySQL Migration",
+ "doctype": "Workspace",
+ "module": "MySQL Migrator",
+ "icon": "database",
+ "indicator_color": "green",
+ "public": 1,
+ "is_hidden": 0,
+ "sequence_id": 2.0,
+ "content": "[{\"id\": \"h_mig\", \"type\": \"header\", \"data\": {\"text\": \"MySQL Universal Migration to ERPNext Core\", \"level\": 3, \"col\": 12}}, {\"id\": \"sc_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Migration Jobs\", \"col\": 4}}, {\"id\": \"h_core\", \"type\": \"header\", \"data\": {\"text\": \"Target ERPNext Default DocTypes\", \"level\": 4, \"col\": 12}}, {\"id\": \"sc_erp_cust\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Customers\", \"col\": 4}}, {\"id\": \"sc_erp_supp\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Suppliers\", \"col\": 4}}, {\"id\": \"sc_erp_item\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Items\", \"col\": 4}}, {\"id\": \"sc_erp_so\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Sales Orders\", \"col\": 4}}, {\"id\": \"sc_erp_po\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Purchase Orders\", \"col\": 4}}, {\"id\": \"sc_erp_emp\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Employees\", \"col\": 4}}]",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "All"
+  }
+ ],
+ "shortcuts": [
+  {
+   "label": "Migration Jobs",
+   "link_to": "MySQL Migration Job",
+   "type": "DocType",
+   "color": "Green",
+   "icon": "settings"
+  },
+  {
+   "label": "Customers",
+   "link_to": "Customer",
+   "type": "DocType",
+   "color": "Blue",
+   "icon": "users"
+  },
+  {
+   "label": "Suppliers",
+   "link_to": "Supplier",
+   "type": "DocType",
+   "color": "Blue",
+   "icon": "truck"
+  },
+  {
+   "label": "Items",
+   "link_to": "Item",
+   "type": "DocType",
+   "color": "Orange",
+   "icon": "box"
+  },
+  {
+   "label": "Sales Orders",
+   "link_to": "Sales Order",
+   "type": "DocType",
+   "color": "Green",
+   "icon": "file-text"
+  },
+  {
+   "label": "Purchase Orders",
+   "link_to": "Purchase Order",
+   "type": "DocType",
+   "color": "Orange",
+   "icon": "shopping-cart"
+  },
+  {
+   "label": "Employees",
+   "link_to": "Employee",
+   "type": "DocType",
+   "color": "Purple",
+   "icon": "user-check"
+  }
+ ],
+ "links": [
+  {
+   "label": "MySQL Migration Job",
+   "link_to": "MySQL Migration Job",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "label": "Customer",
+   "link_to": "Customer",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "label": "Supplier",
+   "link_to": "Supplier",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "label": "Item",
+   "link_to": "Item",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "label": "Sales Order",
+   "link_to": "Sales Order",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "label": "Purchase Order",
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "type": "Link"
+  },
+  {
+   "label": "Employee",
+   "link_to": "Employee",
+   "link_type": "DocType",
+   "type": "Link"
+  }
+ ]
+}
