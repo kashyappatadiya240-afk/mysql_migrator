@@ -509,11 +509,12 @@ def inspect_field_matching(table_name, target_doctype, cols_list):
 	return matched, unmatched, field_mapping
 
 
-def populate_and_match_tables(job_doc):
+def populate_and_match_tables(job_doc, force_reload_all=False):
 	"""
-	Scans the SQL file, populates the table_summary child table,
-	preserves user-selected target DocTypes, auto-suggests new ones,
-	and calculates matched vs. unmatched fields.
+	Scans the SQL file and maintains the table_summary child table.
+	- On initial setup or when force_reload_all=True: discovers and lists all tables from the SQL file.
+	- On normal save: respects user deletions (does NOT re-add tables the user removed).
+	- Preserves user-selected target DocTypes and recalculates matched vs. unmatched fields.
 	"""
 	raw_path = job_doc.uploaded_sql_file or job_doc.sql_file_path
 	if not raw_path:
@@ -525,19 +526,27 @@ def populate_and_match_tables(job_doc):
 
 	create_tables, parsed_data = parse_sql_file_full(file_path)
 
-	# Build existing row lookup
-	existing_rows = {r.table_name: r for r in (job_doc.table_summary or [])}
+	# All tables present in the SQL dump
+	all_sql_tables = list(parsed_data.keys())
+	for tbl in create_tables.keys():
+		if tbl not in all_sql_tables:
+			all_sql_tables.append(tbl)
+
+	existing_rows = {r.table_name: r for r in (job_doc.table_summary or []) if r.table_name}
+
+	# Decide which tables to include in table_summary:
+	# 1. If force_reload_all is True or table_summary is currently empty: load ALL tables from SQL.
+	# 2. Otherwise (normal save): only update the tables currently kept by the user.
+	if force_reload_all or not job_doc.table_summary:
+		target_table_names = all_sql_tables
+	else:
+		target_table_names = [r.table_name for r in job_doc.table_summary if r.table_name]
+
 	new_summary = []
 	total_source = 0
 	any_unmatched = False
 
-	# Order tables
-	all_tables = list(parsed_data.keys())
-	for tbl in create_tables.keys():
-		if tbl not in all_tables:
-			all_tables.append(tbl)
-
-	for tbl in all_tables:
+	for tbl in target_table_names:
 		cols = create_tables.get(tbl, {}).get("cols", [])
 		if not cols and tbl in parsed_data and parsed_data[tbl]:
 			cols = [{"name": k} for k in parsed_data[tbl][0].keys()]
@@ -587,6 +596,18 @@ def populate_and_match_tables(job_doc):
 	job_doc.total_source_records = total_source
 	if job_doc.status not in ("Completed", "In Progress", "On Hold"):
 		job_doc.status = "Pending Approval" if any_unmatched else "Validated"
+
+
+def reload_tables_from_sql(job_name):
+	"""
+	Re-scans the SQL file and restores any missing or deleted tables
+	into the table_summary child table, while preserving existing row configurations.
+	"""
+	job_doc = frappe.get_doc("MySQL Migration Job", job_name)
+	populate_and_match_tables(job_doc, force_reload_all=True)
+	job_doc.save()
+	frappe.db.commit()
+	return {"status": "success", "total_tables": len(job_doc.table_summary)}
 
 
 def check_field_compatibility(job_name):

@@ -26,6 +26,11 @@ class MySQLMigrationJob(Document):
 		return set_job_on_hold(self.name)
 
 	@frappe.whitelist()
+	def reload_all_tables(self):
+		from mysql_migrator.migrator import reload_tables_from_sql
+		return reload_tables_from_sql(self.name)
+
+	@frappe.whitelist()
 	def clear_data(self):
 		from mysql_migrator.migrator import clear_migrated_data
 		return clear_migrated_data(self.name)
